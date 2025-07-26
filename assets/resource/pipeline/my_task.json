@@ -1,11 +1,74 @@
 {
-    "MyTask1": {},
-    "MyTask2": {},
+    "FGO-B服登录": {
+        "action": "StartApp",
+        "package": "com.bilibili.fatego",
+        "next": [
+            "资料更新",
+            "进入游戏",
+            "收看CM"
+        ],
+        "post_delay": 2000
+    },
+    "FGO-B服退出": {
+        "action": "StopApp",
+        "package": "com.bilibili.fatego"
+    },
     "MyTask3": {},
     "MyTask4": {
         "recognition": "Custom",
         "custom_recognition": "my_reco_222",
         "action": "Custom",
         "custom_action": "my_action_111"
+    },
+    "资料更新": {
+        "recognition": "OCR",
+        "expected": [
+            "开始更新资料"
+        ],
+        "action": "Click",
+        "next": [
+            "进入游戏"
+        ]
+    },
+    "进入游戏": {
+        "recognition": "OCR",
+        "expected": [
+            "请点击游戏界面"
+        ],
+        "action": "Click",
+        "next": [
+            "提示登录",
+            "游戏标题页面点击"
+        ]
+    },
+    "收看CM": {
+        "recognition": "OCR",
+        "expected": [
+            "不收看"
+        ],
+        "index": -1,
+        "action": "Click"
+    },
+    "提示登录": {
+        "recognition": "OCR",
+        "expected": [
+            "请输入手机号"
+        ],
+        "doc": "请输入手机号"
+    },
+    "游戏标题页面点击": {
+        "action": "Click",
+        "recognition": "OCR",
+        "expected": "点击屏幕"
+    },
+    "关闭公告": {
+        "action": "Click",
+        "recognition": "TemplateMatch",
+        "template": "游戏公告关闭按钮.png"
+    },
+    "通用关闭": {
+        "action": "Click",
+        "recognition": "OCR",
+        "expected": "关闭"
     }
 }

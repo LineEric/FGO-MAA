@@ -31,17 +31,30 @@
     "agent": {
         "child_exec": "python",
         "child_args": [
+<<<<<<< HEAD
             "{PROJECT_DIR}/../agent/main.py"
+=======
+            "{PROJECT_DIR}/agent/main.py"
+>>>>>>> template/main
         ]
     },
     "task": [
         {
+<<<<<<< HEAD
             "name": "启动游戏",
             "entry": "FGO-B服登录"
         },
         {
             "name": "退出游戏",
             "entry": "FGO-B服退出",
+=======
+            "name": "普通任务",
+            "entry": "MyTask1"
+        },
+        {
+            "name": "选项任务",
+            "entry": "MyTask2",
+>>>>>>> template/main
             "option": [
                 "任务选项1"
             ]

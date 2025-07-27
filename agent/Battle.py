@@ -75,6 +75,8 @@ def StartTurnBattle(turn_index):
     
 ## 默认关闭技能确认
 def UseSkill(turn_data: Turn):
+    for skill in turn_data.skills:
+        
     return
 
 def UseClothSkill():

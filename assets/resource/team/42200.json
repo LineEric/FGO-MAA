@@ -1,1 +1,358 @@
-{"id":42200,"ver":2,"appVer":"2.5.12","userId":16825,"questId":94099812,"phase":1,"enemyHash":"1_0544_bbb1b9d","createdAt":1724406394,"content":"GH4sIAHhayGYA_91WS4_aMBD-Lz67kp0Hi3MrtKsicWrpqUIrhxhi4Thp7ERCiP_esfNYLrtluyKVVkQ4M4znm288M-aMCqkXjVQZSlgYYsSrahAfQPzdCGNRckbSaSLC2JwGGFU5NwIlFCOhRXH6xk2OEkSfSBxFT2ma0pRl6IJRWVlZauMcFPKQ29My51KjxNaNwCiThqdKfG2FBow9VwaUVSm1XTT7PezSjVIYGVk0ilvxWY5GHvU76H5WnRVgWcELB6R5IYatxclYuVuWmfAhjNIK2EQEIyVaoVAyc6HqRylU9qO1APzrjExrnRUjNCLOUhbSLsvGRRpBTEep1CpzpgGlNI4JhjUIuzWMY7rtjdatM6IE-we0Nhv9UietW59I1TolHIA9PpYNqIiDzasrYSfWLopFLfhxyCHoWv87wDVVVdZ2c6qALdKlFnAEI5EgJIT9hUk4n3sm4ZxFMYWVkSgmLzKBWhE669QEd58rih3imzmuukoLGXsv5RmJgtcZMxI7wozMuuUhvpku7RmPdD3au060L-6O3wvsAC7lu2NT9YXq63z82kIhZ0KJA7QGVDxIfNd3IJS07Rx5dgi7LPk4O9kBXrVrpfhJ1BteH4R9bvRBBtua66wsHEMQbF4Lk5dubDhiF3cIr6PRSdGCCdDIpJkkk2aSTJrJYFJuwb25cWuhYxHuX8brxTvd8Rq2wE0rzebL8wioJdxUXI0jD6z6MZA2xop6GHNXPj7RwUm_Z_QxOL3BSfT2QLaTntG9e2u6Kv9gk_eGKv-XCt1-hHviTrnB9xgj_3sCbB3-EkA3_v-8j-LyByClzFCnDAAA","username":"wlgsl","votes":{"up":70,"down":15,"mine":null},"data":{"result":{"minBuild":933,"appBuild":973,"quest":{"id":94099812,"phase":1,"enemyHash":"1_0544_bbb1b9d"},"options":{"mightyChain":true,"disableEvent":false,"pointBuffs":null,"simulateAi":false,"enemyRateUp":null},"team":{"name":null,"mysticCode":{"mysticCodeId":40,"level":6},"onFieldSvts":[{"svtId":901400,"limitCount":4,"skillIds":[2111550,2112350,2113551],"skillLvs":[10,10,10],"tdId":901401,"tdLv":1,"lv":90,"atkFou":1000,"hpFou":1000,"ceLimitBreak":true,"ceLv":100,"supportType":"none"},{"svtId":2300900,"limitCount":4,"skillIds":[2388550,2389451,2390450],"skillLvs":[10,10,10],"appendLvs":[0,0,0,0,10],"tdId":2300901,"tdLv":1,"lv":90,"atkFou":1000,"hpFou":1000,"ceId":9403990,"ceLimitBreak":true,"ceLv":100,"supportType":"none"},{"svtId":604200,"limitCount":4,"skillIds":[905550,906550,907550],"skillLvs":[10,10,10],"appendLvs":[0,10,0,0,0],"tdId":604201,"tdLv":1,"lv":90,"atkFou":1000,"hpFou":1000,"ceLimitBreak":false,"ceLv":0,"supportType":"none"}],"backupSvts":[null,null,null]},"delegate":{},"actions":[{"type":"skill","svt":1,"skill":0,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"skill","svt":1,"skill":1,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"skill","svt":1,"skill":2,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"skill","svt":0,"skill":0,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"skill","svt":0,"skill":1,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"skill","svt":0,"skill":2,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"skill","svt":2,"skill":1,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"skill","svt":2,"skill":2,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"attack","attacks":[{"svt":1,"card":3,"isTD":false,"critical":true,"cardType":"buster"},{"svt":1,"card":-1,"isTD":true,"critical":false,"cardType":"buster"},{"svt":1,"card":4,"isTD":false,"critical":true,"cardType":"buster"}],"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"skill","svt":2,"skill":0,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"skill","skill":2,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"skill","svt":1,"skill":0,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"skill","svt":1,"skill":1,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"attack","attacks":[{"svt":1,"card":-1,"isTD":true,"critical":false,"cardType":"buster"}],"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"skill","svt":1,"skill":2,"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}},{"type":"attack","attacks":[{"svt":1,"card":-1,"isTD":true,"critical":false,"cardType":"buster"},{"svt":1,"card":3,"isTD":false,"critical":true,"cardType":"buster"},{"svt":1,"card":4,"isTD":false,"critical":true,"cardType":"buster"}],"options":{"playerTarget":1,"enemyTarget":0,"random":900,"threshold":1000}}],"isCritTeam":false}}}
+{
+    "id": 42200,
+    "ver": 2,
+    "appVer": "2.5.12",
+    "userId": 16825,
+    "questId": 94099812,
+    "phase": 1,
+    "enemyHash": "1_0544_bbb1b9d",
+    "createdAt": 1724406394,
+    "content": "GH4sIAHhayGYA_91WS4_aMBD-Lz67kp0Hi3MrtKsicWrpqUIrhxhi4Thp7ERCiP_esfNYLrtluyKVVkQ4M4znm288M-aMCqkXjVQZSlgYYsSrahAfQPzdCGNRckbSaSLC2JwGGFU5NwIlFCOhRXH6xk2OEkSfSBxFT2ma0pRl6IJRWVlZauMcFPKQ29My51KjxNaNwCiThqdKfG2FBow9VwaUVSm1XTT7PezSjVIYGVk0ilvxWY5GHvU76H5WnRVgWcELB6R5IYatxclYuVuWmfAhjNIK2EQEIyVaoVAyc6HqRylU9qO1APzrjExrnRUjNCLOUhbSLsvGRRpBTEep1CpzpgGlNI4JhjUIuzWMY7rtjdatM6IE-we0Nhv9UietW59I1TolHIA9PpYNqIiDzasrYSfWLopFLfhxyCHoWv87wDVVVdZ2c6qALdKlFnAEI5EgJIT9hUk4n3sm4ZxFMYWVkSgmLzKBWhE669QEd58rih3imzmuukoLGXsv5RmJgtcZMxI7wozMuuUhvpku7RmPdD3au060L-6O3wvsAC7lu2NT9YXq63z82kIhZ0KJA7QGVDxIfNd3IJS07Rx5dgi7LPk4O9kBXrVrpfhJ1BteH4R9bvRBBtua66wsHEMQbF4Lk5dubDhiF3cIr6PRSdGCCdDIpJkkk2aSTJrJYFJuwb25cWuhYxHuX8brxTvd8Rq2wE0rzebL8wioJdxUXI0jD6z6MZA2xop6GHNXPj7RwUm_Z_QxOL3BSfT2QLaTntG9e2u6Kv9gk_eGKv-XCt1-hHviTrnB9xgj_3sCbB3-EkA3_v-8j-LyByClzFCnDAAA",
+    "username": "wlgsl",
+    "votes": {
+        "up": 70,
+        "down": 15,
+        "mine": null
+    },
+    "data": {
+        "result": {
+            "minBuild": 933,
+            "appBuild": 973,
+            "quest": {
+                "id": 94099812,
+                "phase": 1,
+                "enemyHash": "1_0544_bbb1b9d"
+            },
+            "options": {
+                "mightyChain": true,
+                "disableEvent": false,
+                "pointBuffs": null,
+                "simulateAi": false,
+                "enemyRateUp": null
+            },
+            "team": {
+                "name": null,
+                "mysticCode": {
+                    "mysticCodeId": 40,
+                    "level": 6
+                },
+                "onFieldSvts": [
+                    {
+                        "svtId": 901400,
+                        "limitCount": 4,
+                        "skillIds": [
+                            2111550,
+                            2112350,
+                            2113551
+                        ],
+                        "skillLvs": [
+                            10,
+                            10,
+                            10
+                        ],
+                        "tdId": 901401,
+                        "tdLv": 1,
+                        "lv": 90,
+                        "atkFou": 1000,
+                        "hpFou": 1000,
+                        "ceLimitBreak": true,
+                        "ceLv": 100,
+                        "supportType": "none"
+                    },
+                    {
+                        "svtId": 2300900,
+                        "limitCount": 4,
+                        "skillIds": [
+                            2388550,
+                            2389451,
+                            2390450
+                        ],
+                        "skillLvs": [
+                            10,
+                            10,
+                            10
+                        ],
+                        "appendLvs": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            10
+                        ],
+                        "tdId": 2300901,
+                        "tdLv": 1,
+                        "lv": 90,
+                        "atkFou": 1000,
+                        "hpFou": 1000,
+                        "ceId": 9403990,
+                        "ceLimitBreak": true,
+                        "ceLv": 100,
+                        "supportType": "none"
+                    },
+                    {
+                        "svtId": 604200,
+                        "limitCount": 4,
+                        "skillIds": [
+                            905550,
+                            906550,
+                            907550
+                        ],
+                        "skillLvs": [
+                            10,
+                            10,
+                            10
+                        ],
+                        "appendLvs": [
+                            0,
+                            10,
+                            0,
+                            0,
+                            0
+                        ],
+                        "tdId": 604201,
+                        "tdLv": 1,
+                        "lv": 90,
+                        "atkFou": 1000,
+                        "hpFou": 1000,
+                        "ceLimitBreak": false,
+                        "ceLv": 0,
+                        "supportType": "none"
+                    }
+                ],
+                "backupSvts": [
+                    null,
+                    null,
+                    null
+                ]
+            },
+            "delegate": {},
+            "actions": [
+                {
+                    "type": "skill",
+                    "svt": 1,
+                    "skill": 0,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "skill",
+                    "svt": 1,
+                    "skill": 1,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "skill",
+                    "svt": 1,
+                    "skill": 2,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "skill",
+                    "svt": 0,
+                    "skill": 0,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "skill",
+                    "svt": 0,
+                    "skill": 1,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "skill",
+                    "svt": 0,
+                    "skill": 2,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "skill",
+                    "svt": 2,
+                    "skill": 1,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "skill",
+                    "svt": 2,
+                    "skill": 2,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "attack",
+                    "attacks": [
+                        {
+                            "svt": 1,
+                            "card": 3,
+                            "isTD": false,
+                            "critical": true,
+                            "cardType": "buster"
+                        },
+                        {
+                            "svt": 1,
+                            "card": -1,
+                            "isTD": true,
+                            "critical": false,
+                            "cardType": "buster"
+                        },
+                        {
+                            "svt": 1,
+                            "card": 4,
+                            "isTD": false,
+                            "critical": true,
+                            "cardType": "buster"
+                        }
+                    ],
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "skill",
+                    "svt": 2,
+                    "skill": 0,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "skill",
+                    "skill": 2,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "skill",
+                    "svt": 1,
+                    "skill": 0,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "skill",
+                    "svt": 1,
+                    "skill": 1,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "attack",
+                    "attacks": [
+                        {
+                            "svt": 1,
+                            "card": -1,
+                            "isTD": true,
+                            "critical": false,
+                            "cardType": "buster"
+                        }
+                    ],
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "skill",
+                    "svt": 1,
+                    "skill": 2,
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                },
+                {
+                    "type": "attack",
+                    "attacks": [
+                        {
+                            "svt": 1,
+                            "card": -1,
+                            "isTD": true,
+                            "critical": false,
+                            "cardType": "buster"
+                        },
+                        {
+                            "svt": 1,
+                            "card": 3,
+                            "isTD": false,
+                            "critical": true,
+                            "cardType": "buster"
+                        },
+                        {
+                            "svt": 1,
+                            "card": 4,
+                            "isTD": false,
+                            "critical": true,
+                            "cardType": "buster"
+                        }
+                    ],
+                    "options": {
+                        "playerTarget": 1,
+                        "enemyTarget": 0,
+                        "random": 900,
+                        "threshold": 1000
+                    }
+                }
+            ],
+            "isCritTeam": false
+        }
+    }
+}

@@ -8,7 +8,7 @@ BattleData = None #  BattleJson
 
 @AgentServer.custom_action("InitBattleJson")
 class InitBattleInfo(CustomAction):
-    self.battle_data = None
+    battle_data = None
     def run(
         self,
         context: Context,
@@ -55,42 +55,67 @@ class InitBattleInfo(CustomAction):
     
 @AgentServer.custom_action("StartTurn")
 class StartTurn(CustomAction):
+    ctx = None
+    
     def run(
         self,
         context: Context,
         argv: CustomAction.RunArg,
     ) -> bool:
-        StartTurnBattle()
+        ctx = context
+        # 先默认第一回合，再寻找方法来读取index
+        self.StartTurnBattle(1)
         return True
 
-def StartTurnBattle(turn_index):
-    turn_battle_data = BattleData.get_turn_data(turn_index)
-    if(turn_battle_data):
-        UseSkill()  
-        UseClothSkill()
-        Attack()
-    else:
-        start_auto_battle()
-    return
+
+    def StartTurnBattle(self, turn_index):
+        turn_battle_data = BattleData.get_turn_data(turn_index)
+        if turn_battle_data:
+            self.SkillPhase(turn_battle_data)  
+            self.ClothSkillPhase()
+            self.AttackPhase()
+        else:
+            self.start_auto_battle()
+        return
     
-## 默认关闭技能确认
-def UseSkill(turn_data: Turn):
-    for skill in turn_data.skills:
+    ## 默认关闭技能确认
+    def SkillPhase(self, turn_data: Turn):
+        for skill in turn_data.skills:
+             self.UseSvtSkill(skill.svt, skill.skill, skill.options.playerTarget, skill.options.enemyTarget)
+        return
+
+    def UseSvtSkill(self, svt, skill, playerTarget, enemyTarget):
+        self.SelectEnemy(enemyTarget)
+        svt_pos_spacing_x = 100 #从者间隔
+        skill_icon_spacing_x = 100 #技能间隔
+        skill_pos_x = svt * svt_pos_spacing_x + skill * skill_icon_spacing_x
+        skill_pos_y = 100 # 先填一个默认值
+        self.ctx.controller.post_click(skill_pos_x, skill_pos_y).wait()
         
-    return
+        
+        # 要看一下，这个怎么选的
+        if playerTarget != -1:
+            svt_skill_select_svt_target_spacing_x = 100 #技能对象选择间隔
+            svt_skill_target_pos_y = 100 #垂直方向
+            svt_skill_target_pos_x = playerTarget * svt_skill_select_svt_target_spacing_x
+            self.ctx.controller.post_click(svt_skill_target_pos_x, svt_skill_target_pos_y).wait()
 
-def UseClothSkill():
-    return
+        
+    def ClothSkillPhase():
+        #先不做，懒了
+        return
 
-def Attack():
-    return
+    def AttackPhase(self, turn_data: Turn):
+        self.SelectCard(turn_data)
+        return
 
-def SeleteEnemy():
-    return
+    def SelectCard(self, svt, noble_phantasm):
+        return
 
-def SelectCard():
-    return
+    def SelectEnemy():
+        #now default
+        return
 
-def start_auto_battle():
-    return
+    def start_auto_battle():
+        return
 

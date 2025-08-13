@@ -1,51 +1,10 @@
 {
     "FGO自动战斗": {
-        "recognition": "Custom",
         "action": "Custom",
         "custom_action": "InitBattleJson"
     },
-    "选择技能": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "next": "点击攻击",
-        "template": "skill_button.png", // 你需要准备技能按钮的模板图
-        "roi": [
-            0,
-            800,
-            1920,
-            280
-        ], // 技能区区域
-        "optional": true // 可选，若没找到技能按钮则跳过
-    },
-    "点击攻击": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "next": "选择卡牌",
-        "template": "battle01.png",
-        "roi": [
-            800,
-            900,
-            320,
-            120
-        ], // “攻击”按钮区域
-        "expected": "攻击"
-    },
-    "选择卡牌": {
-        "recognition": "TemplateMatch",
-        "action": "Click",
-        "next": "等待回合结束",
-        "template": "battle02.png",
-        "roi": [
-            0,
-            0,
-            1920,
-            1080
-        ]
-    },
-    "等待回合结束": {
-        "recognition": "Wait",
-        "action": "None",
-        "next": "FGO自动战斗",
-        "timeout": 10000 // 等待动画结束，时间可根据实际调整
+    "FGO开始战斗": {
+        "action": "Custom",
+        "custom_action": "StartTurn"
     }
 }

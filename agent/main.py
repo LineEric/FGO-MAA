@@ -3,10 +3,7 @@ import sys
 from maa.agent.agent_server import AgentServer
 from maa.toolkit import Toolkit
 
-import agent.BattleAction as BattleAction
-import my_reco
-
-
+import Battle
 def main():
     Toolkit.init_option("./")
 

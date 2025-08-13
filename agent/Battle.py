@@ -1,14 +1,13 @@
 from maa.agent.agent_server import AgentServer
 from maa.custom_action import CustomAction
 from maa.context import Context
-from BattleData import *
+from BattleData import BattleData
 import json
 import os
 import time
 import logging
 import configparser
 import datetime
-import cv2
 import numpy as np
 from typing import Dict, List, Optional, Any, Tuple
 
@@ -301,7 +300,7 @@ class InitBattleInfo(CustomAction):
         context: Context,
         argv: CustomAction.RunArg,
     ) -> bool:
-        json_file_path = "1001.json" # 假设1001.json在与BattleAction.py相同的目录下
+        json_file_path = "../assets/resource/team/42200.json" # 假设1001.json在与BattleAction.py相同的目录下
         
         # 检查文件是否存在
         if not os.path.exists(json_file_path):

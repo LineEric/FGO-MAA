@@ -1,7 +1,10 @@
 {
     "FGO自动战斗": {
         "action": "Custom",
-        "custom_action": "InitBattleJson"
+        "custom_action": "InitBattleJson",
+        "next": [
+            "FGO开始战斗"
+        ]
     },
     "FGO开始战斗": {
         "action": "Custom",

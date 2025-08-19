@@ -51,7 +51,7 @@ class SkillAction(BaseAction):
 class Turn:
     turn_number: int
     skills: List[SkillAction] = field(default_factory=list)
-    attacks: List[AttackAction] = field(default_factory=list)
+    attacks: AttackAction = None
 
 # ================================
 # 3. 其他数据结构 (修正了 OnFieldSvt)
@@ -157,12 +157,12 @@ class Result:
                     ))
                     current_turn_number += 1
                     current_turn_skills = []
-                    current_turn_attacks = []
+                    current_turn_attacks = None
                 
                 current_turn_skills.append(SkillAction.from_dict(action_raw_dict))
                 
             elif action_type == 'attack':
-                current_turn_attacks.append(AttackAction.from_dict(action_raw_dict))
+                current_turn_attacks = AttackAction.from_dict(action_raw_dict)
 
         if current_turn_skills or current_turn_attacks:
             parsed_turns.append(Turn(

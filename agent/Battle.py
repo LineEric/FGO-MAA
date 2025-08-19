@@ -10,6 +10,7 @@ import configparser
 import datetime
 import numpy as np
 from typing import Dict, List, Optional, Any, Tuple
+import traceback
 
 # 配置日志
 logging.basicConfig(
@@ -34,38 +35,35 @@ class FGOBattleConfig:
     """FGO战斗配置管理类"""
     def __init__(self, config_file="fgo_config.ini"):
         self.config = configparser.ConfigParser()
-        try:
-            self.config.read(config_file)
-            logger.info(f"配置文件 {config_file} 加载成功")
-        except Exception as e:
-            logger.error(f"加载配置文件失败: {e}")
-            # 创建默认配置
-            self._create_default_config()
-            # 保存默认配置到文件
-            with open(config_file, 'w') as f:
-                self.config.write(f)
-            logger.info(f"已创建默认配置文件: {config_file}")
+        self.config.read(config_file)
+        logger.info(f"配置文件 {config_file} 加载成功")
+        # 创建默认配置
+        self._create_default_config()
+        # 保存默认配置到文件
+        with open(config_file, 'w') as f:
+            self.config.write(f)
+        logger.info(f"已创建默认配置文件: {config_file}")
     
     def _create_default_config(self):
         """创建默认配置"""
         # 位置坐标配置
         self.config['Positions'] = {
             # 从者位置
-            'servant1_x': '230', 'servant1_y': '430',
-            'servant2_x': '430', 'servant2_y': '430',
-            'servant3_x': '630', 'servant3_y': '430',
+            'servant1_x': '42', 'servant1_y': '430',
+            'servant2_x': '357', 'servant2_y': '430',
+            'servant3_x': '676', 'servant3_y': '430',
             # 技能位置
-            'skill_y': '500',
-            'skill1_offset_x': '50', 'skill2_offset_x': '100', 'skill3_offset_x': '150',
+            'skill_y': '580',
+            'skill1_offset_x': '30', 'skill2_offset_x': '123', 'skill3_offset_x': '212',
             # 攻击按钮
-            'attack_btn_x': '830', 'attack_btn_y': '450',
+            'attack_btn_x': '1133', 'attack_btn_y': '599',
             # 宝具卡位置
             'np_y': '200',
-            'np1_x': '250', 'np2_x': '450', 'np3_x': '650',
+            'np1_x': '410', 'np2_x': '650', 'np3_x': '880',
             # 普通指令卡位置
-            'card_y': '350',
-            'card1_x': '170', 'card2_x': '320', 'card3_x': '470', 
-            'card4_x': '620', 'card5_x': '770',
+            'card_y': '500',
+            'card1_x': '126', 'card2_x': '380', 'card3_x': '640', 
+            'card4_x': '900', 'card5_x': '1160',
             # 敌人位置
             'enemy_y': '100',
             'enemy1_x': '230', 'enemy2_x': '430', 'enemy3_x': '630',
@@ -278,7 +276,13 @@ def safe_execute(func):
                 return func(*args, **kwargs)
             except Exception as e:
                 retry_count += 1
-                logger.warning(f"执行 {func.__name__} 失败 ({retry_count}/{max_retries}): {e}")
+                # 获取完整的调用栈信息
+                stack_trace = traceback.format_exc()
+                
+                logger.warning(
+                    f"执行 {func.__name__} 失败 ({retry_count}/{max_retries}): {e}\n"
+                    f"调用栈 (Call Stack):\n{stack_trace}"
+                )
                 time.sleep(1)
         
         logger.error(f"执行 {func.__name__} 最终失败，放弃")
@@ -385,8 +389,8 @@ class StartTurn(CustomAction):
         for i in range(3):  # 3个从者
             svt_x = self.SERVANT_POSITIONS[i]["x"]
             skills = [
-                {"x": svt_x - skill1_offset, "y": skill_y},
-                {"x": svt_x, "y": skill_y},
+                {"x": svt_x + skill1_offset, "y": skill_y},
+                {"x": svt_x + skill2_offset, "y": skill_y},
                 {"x": svt_x + skill3_offset, "y": skill_y}
             ]
             self.SKILL_POSITIONS.append(skills)
@@ -487,10 +491,10 @@ class StartTurn(CustomAction):
         if turn_battle_data:
             logger.info(f"===== 执行第 {CURRENT_WAVE}/{MAX_WAVES} 波, 第 {turn_index+1} 回合 =====")
             # 1. 技能阶段
-            self.skill_phase(turn_battle_data)
+            # self.skill_phase(turn_battle_data)
             
             # 2. 等待技能动画完成
-            time.sleep(self.SKILL_ANIMATION_WAIT)
+            # time.sleep(self.SKILL_ANIMATION_WAIT)
             
             # 3. 攻击阶段
             self.attack_phase(turn_battle_data)
@@ -539,7 +543,7 @@ class StartTurn(CustomAction):
         
         # 点击几次屏幕以跳过结算画面
         for _ in range(5):
-            self.ctx.controller.post_click(self.BATTLE_FINISHED_CHECK["x"], 
+            self.ctx.tasker.controller.post_click(self.BATTLE_FINISHED_CHECK["x"], 
                                           self.BATTLE_FINISHED_CHECK["y"]).wait()
             time.sleep(self.DIALOG_WAIT)
         
@@ -603,13 +607,13 @@ class StartTurn(CustomAction):
     def select_continue_quest(self):
         """选择继续出击"""
         # 点击"是"按钮
-        self.ctx.controller.post_click(350, 450).wait()
+        self.ctx.tasker.controller.post_click(350, 450).wait()
         time.sleep(self.DIALOG_WAIT)
     
     def select_quit_quest(self):
         """选择退出战斗"""
         # 点击"否"按钮
-        self.ctx.controller.post_click(550, 450).wait()
+        self.ctx.tasker.controller.post_click(550, 450).wait()
         time.sleep(self.DIALOG_WAIT)
     
     def check_ap_recovery_dialog(self):
@@ -643,11 +647,11 @@ class StartTurn(CustomAction):
             # 点击对应的苹果
             pos = apple_positions[apple_type]
             logger.info(f"使用{apple_type}苹果回复体力")
-            self.ctx.controller.post_click(pos['x'], pos['y']).wait()
+            self.ctx.tasker.controller.post_click(pos['x'], pos['y']).wait()
             time.sleep(self.DIALOG_WAIT)
             
             # 点击确认按钮
-            self.ctx.controller.post_click(550, 350).wait()
+            self.ctx.tasker.controller.post_click(550, 350).wait()
             time.sleep(2 * self.DIALOG_WAIT)
             
             # 记录苹果使用
@@ -665,7 +669,7 @@ class StartTurn(CustomAction):
         if not self.config.getboolean('Support', 'enable_support_selection', fallback=True):
             # 如果没有启用助战选择，直接选第一个
             logger.info("助战选择功能未启用，选择默认助战")
-            self.ctx.controller.post_click(450, 300).wait()
+            self.ctx.tasker.controller.post_click(450, 300).wait()
             time.sleep(self.DIALOG_WAIT * 2)  # 等待助战加载
             return True
         
@@ -706,7 +710,7 @@ class StartTurn(CustomAction):
         
         # 如果找不到指定助战，选择第一个
         logger.info("未找到指定助战，选择第一个")
-        self.ctx.controller.post_click(450, 300).wait()
+        self.ctx.tasker.controller.post_click(450, 300).wait()
         time.sleep(2 * self.DIALOG_WAIT)
         return True
     
@@ -730,11 +734,11 @@ class StartTurn(CustomAction):
     def _refresh_support_list(self):
         """刷新助战列表"""
         # 点击刷新按钮
-        self.ctx.controller.post_click(750, 200).wait()
+        self.ctx.tasker.controller.post_click(750, 200).wait()
         time.sleep(self.DIALOG_WAIT)
         
         # 点击确认按钮
-        self.ctx.controller.post_click(550, 450).wait()
+        self.ctx.tasker.controller.post_click(550, 450).wait()
     
     @safe_execute
     def skill_phase(self, turn_data):
@@ -771,21 +775,21 @@ class StartTurn(CustomAction):
     def use_svt_skill(self, svt_index, skill_index, player_target, enemy_target):
         """使用从者技能"""
         # 先选择敌人目标(如果有)
-        if enemy_target != -1:
-            self.select_enemy(enemy_target)
-            time.sleep(0.3)
+        # if enemy_target != -1:
+        #     self.select_enemy(enemy_target)
+        #     time.sleep(0.3)
         
         # 获取技能按钮位置
         if 0 <= svt_index < len(self.SKILL_POSITIONS) and 0 <= skill_index < len(self.SKILL_POSITIONS[svt_index]):
             skill_pos = self.SKILL_POSITIONS[svt_index][skill_index]
-            self.ctx.controller.post_click(skill_pos["x"], skill_pos["y"]).wait()
+            self.ctx.tasker.controller.post_click(skill_pos["x"], skill_pos["y"]).wait()
             time.sleep(0.5)  # 等待技能按钮动画
             
             # 如果需要选择从者目标
             if player_target != -1 and 0 <= player_target < len(self.SKILL_TARGET_POSITIONS):
                 target_pos = self.SKILL_TARGET_POSITIONS[player_target]
                 time.sleep(0.3)
-                self.ctx.controller.post_click(target_pos["x"], target_pos["y"]).wait()
+                self.ctx.tasker.controller.post_click(target_pos["x"], target_pos["y"]).wait()
                 time.sleep(0.3)
         else:
             logger.error(f"错误: 从者索引 {svt_index+1} 或技能索引 {skill_index+1} 超出范围")
@@ -794,19 +798,19 @@ class StartTurn(CustomAction):
     def use_master_skill(self, skill_index, player_target, enemy_target):
         """使用御主技能"""
         # 先点击御主技能按钮打开菜单
-        self.ctx.controller.post_click(self.MASTER_SKILL_BUTTON["x"], 
+        self.ctx.tasker.controller.post_click(self.MASTER_SKILL_BUTTON["x"], 
                                       self.MASTER_SKILL_BUTTON["y"]).wait()
         time.sleep(0.5)
         
         # 选择敌人目标(如果有)
-        if enemy_target != -1:
-            self.select_enemy(enemy_target)
-            time.sleep(0.3)
+        # if enemy_target != -1:
+        #     self.select_enemy(enemy_target)
+        #     time.sleep(0.3)
         
         # 选择具体的御主技能
         if 0 <= skill_index < len(self.MASTER_SKILLS):
             skill_pos = self.MASTER_SKILLS[skill_index]
-            self.ctx.controller.post_click(skill_pos["x"], skill_pos["y"]).wait()
+            self.ctx.tasker.controller.post_click(skill_pos["x"], skill_pos["y"]).wait()
             time.sleep(0.5)
             
             # 特殊处理：换人礼装(第3个技能)
@@ -817,7 +821,7 @@ class StartTurn(CustomAction):
             elif player_target != -1 and 0 <= player_target < len(self.SKILL_TARGET_POSITIONS):
                 target_pos = self.SKILL_TARGET_POSITIONS[player_target]
                 time.sleep(0.3)
-                self.ctx.controller.post_click(target_pos["x"], target_pos["y"]).wait()
+                self.ctx.tasker.controller.post_click(target_pos["x"], target_pos["y"]).wait()
                 time.sleep(0.3)
         else:
             logger.error(f"错误: 御主技能索引 {skill_index+1} 超出范围")
@@ -847,7 +851,7 @@ class StartTurn(CustomAction):
         # 1. 点击前排要换出的从者
         if 0 <= servant_out_index < len(front_positions):
             pos = front_positions[servant_out_index]
-            self.ctx.controller.post_click(pos["x"], pos["y"]).wait()
+            self.ctx.tasker.controller.post_click(pos["x"], pos["y"]).wait()
             time.sleep(0.5)
         else:
             logger.error("错误: 无效的前排从者索引")
@@ -857,14 +861,14 @@ class StartTurn(CustomAction):
         servant_in_adjusted = servant_in_index - 3  # 调整为后排索引(0-2)
         if 0 <= servant_in_adjusted < len(back_positions):
             pos = back_positions[servant_in_adjusted]
-            self.ctx.controller.post_click(pos["x"], pos["y"]).wait()
+            self.ctx.tasker.controller.post_click(pos["x"], pos["y"]).wait()
             time.sleep(0.5)
         else:
             logger.error("错误: 无效的后排从者索引")
             return False
         
         # 3. 点击确认按钮
-        self.ctx.controller.post_click(confirm_button["x"], confirm_button["y"]).wait()
+        self.ctx.tasker.controller.post_click(confirm_button["x"], confirm_button["y"]).wait()
         time.sleep(3)  # 等待换人动画
         
         return True
@@ -872,7 +876,7 @@ class StartTurn(CustomAction):
     @safe_execute
     def attack_phase(self, turn_data):
         """攻击阶段处理"""
-        if not hasattr(turn_data, 'attacks') or not hasattr(turn_data.attacks, 'attacks'):
+        if not hasattr(turn_data, 'attacks'):
             logger.warning("回合没有攻击操作或数据格式不正确")
             return
             
@@ -880,7 +884,7 @@ class StartTurn(CustomAction):
         
         # 点击攻击按钮，进入选卡界面
         logger.info("点击攻击按钮，进入选卡阶段")
-        self.ctx.controller.post_click(self.ATTACK_BUTTON["x"], self.ATTACK_BUTTON["y"]).wait()
+        self.ctx.tasker.controller.post_click(self.ATTACK_BUTTON["x"], self.ATTACK_BUTTON["y"]).wait()
         time.sleep(1.5)  # 等待进入选卡界面
         
         # 如果有指定敌人目标，先选择
@@ -906,7 +910,8 @@ class StartTurn(CustomAction):
                 if 0 <= attack.svt < len(self.NOBLE_PHANTASM_CARDS):
                     logger.info(f"选择从者 {attack.svt+1} 的宝具卡")
                     np_card = self.NOBLE_PHANTASM_CARDS[attack.svt]
-                    self.ctx.controller.post_click(np_card["x"], np_card["y"]).wait()
+                    self.ctx.tasker.controller.post_click(np_card["x"], np_card["y"]).wait()
+                    card_count += 1
                 else:
                     logger.error(f"错误: 宝具卡从者索引 {attack.svt+1} 超出范围")
             else:
@@ -914,11 +919,12 @@ class StartTurn(CustomAction):
                 if 0 <= attack.card < len(self.CARDS):
                     logger.info(f"选择第 {attack.card+1} 张普通指令卡")
                     card = self.CARDS[attack.card]
-                    self.ctx.controller.post_click(card["x"], card["y"]).wait()
+                    self.ctx.tasker.controller.post_click(card["x"], card["y"]).wait()
+                    card_count += 1
+
                 else:
                     logger.error(f"错误: 指令卡索引 {attack.card+1} 超出范围")
             
-            card_count += 1
             time.sleep(self.CARD_SELECT_DELAY)
         
         # 如果选择的卡牌不足3张，随机选择剩余卡牌
@@ -934,7 +940,7 @@ class StartTurn(CustomAction):
                 # 实际应用中应检测卡片是否可点击，这里简化处理
                 card = self.CARDS[card_idx]
                 logger.info(f"随机选择第 {card_idx+1} 张指令卡")
-                self.ctx.controller.post_click(card["x"], card["y"]).wait()
+                self.ctx.tasker.controller.post_click(card["x"], card["y"]).wait()
                 card_count += 1
                 time.sleep(self.CARD_SELECT_DELAY)
         
@@ -947,7 +953,7 @@ class StartTurn(CustomAction):
         if enemy_index != -1 and 0 <= enemy_index < len(self.ENEMY_POSITIONS):
             enemy_pos = self.ENEMY_POSITIONS[enemy_index]
             logger.info(f"选择第 {enemy_index+1} 个敌人")
-            self.ctx.controller.post_click(enemy_pos["x"], enemy_pos["y"]).wait()
+            self.ctx.tasker.controller.post_click(enemy_pos["x"], enemy_pos["y"]).wait()
     
     @safe_execute
     def auto_battle_mode(self):
@@ -961,7 +967,7 @@ class StartTurn(CustomAction):
         self.use_effective_skills()
         
         # 第二步：进入攻击阶段
-        self.ctx.controller.post_click(self.ATTACK_BUTTON["x"], self.ATTACK_BUTTON["y"]).wait()
+        self.ctx.tasker.controller.post_click(self.ATTACK_BUTTON["x"], self.ATTACK_BUTTON["y"]).wait()
         time.sleep(1.5)
         
         # 第三步：选择指令卡
@@ -972,7 +978,7 @@ class StartTurn(CustomAction):
         for svt_idx, is_available in enumerate(available_np):
             if is_available and cards_selected < self.MAX_CARDS_PER_TURN:
                 np_card = self.NOBLE_PHANTASM_CARDS[svt_idx]
-                self.ctx.controller.post_click(np_card["x"], np_card["y"]).wait()
+                self.ctx.tasker.controller.post_click(np_card["x"], np_card["y"]).wait()
                 cards_selected += 1
                 time.sleep(0.3)
         
@@ -981,7 +987,7 @@ class StartTurn(CustomAction):
         for card_idx in advantage_cards:
             if cards_selected < self.MAX_CARDS_PER_TURN:
                 card = self.CARDS[card_idx]
-                self.ctx.controller.post_click(card["x"], card["y"]).wait()
+                self.ctx.tasker.controller.post_click(card["x"], card["y"]).wait()
                 cards_selected += 1
                 time.sleep(0.3)
         
@@ -989,7 +995,7 @@ class StartTurn(CustomAction):
         for card_idx in range(len(self.CARDS)):
             if cards_selected < self.MAX_CARDS_PER_TURN:
                 card = self.CARDS[card_idx]
-                self.ctx.controller.post_click(card["x"], card["y"]).wait()
+                self.ctx.tasker.controller.post_click(card["x"], card["y"]).wait()
                 cards_selected += 1
                 time.sleep(0.3)
         
@@ -1106,7 +1112,7 @@ class SupportServantSelector:
         if not self.config.getboolean('Support', 'enable_support_selection', fallback=True):
             # 如果没有启用助战选择，直接选第一个
             self.logger.info("助战选择功能未启用，选择默认助战")
-            self.ctx.controller.post_click(450, 300).wait()
+            self.ctx.tasker.controller.post_click(450, 300).wait()
             time.sleep(self.DIALOG_WAIT * 2)  # 等待助战加载
             return True
         
@@ -1119,7 +1125,7 @@ class SupportServantSelector:
         if not target_servant and not target_craft_essence and not target_skill:
             # 没有指定任何筛选条件，选择第一个
             self.logger.info("未指定助战筛选条件，选择第一个")
-            self.ctx.controller.post_click(450, 300).wait()
+            self.ctx.tasker.controller.post_click(450, 300).wait()
             time.sleep(self.DIALOG_WAIT * 2)
             return True
         
@@ -1172,7 +1178,7 @@ class SupportServantSelector:
         
         # 如果经过所有尝试仍未找到，选择第一个
         self.logger.info("未找到指定助战，选择第一个")
-        self.ctx.controller.post_click(450, 300).wait()
+        self.ctx.tasker.controller.post_click(450, 300).wait()
         time.sleep(2 * self.DIALOG_WAIT)
         return True
     
@@ -1193,7 +1199,7 @@ class SupportServantSelector:
         if class_name in class_positions:
             pos = class_positions[class_name]
             self.logger.info(f"应用{class_name}职阶筛选")
-            self.ctx.controller.post_click(pos["x"], pos["y"]).wait()
+            self.ctx.tasker.controller.post_click(pos["x"], pos["y"]).wait()
             time.sleep(self.DIALOG_WAIT)
             return True
         else:
@@ -1226,11 +1232,11 @@ class SupportServantSelector:
     def _refresh_support_list(self):
         """刷新助战列表"""
         # 点击刷新按钮
-        self.ctx.controller.post_click(750, 200).wait()
+        self.ctx.tasker.controller.post_click(750, 200).wait()
         time.sleep(self.DIALOG_WAIT)
         
         # 点击确认按钮
-        self.ctx.controller.post_click(550, 450).wait()
+        self.ctx.tasker.controller.post_click(550, 450).wait()
 
 
 # 使用示例
